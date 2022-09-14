@@ -16,15 +16,15 @@ type Emits = {
 defineEmits<Emits>();
 
 const classesByButtonVariant: Record<ButtonVariant, string> = {
-  primary: "px-2 py-1 rounded",
+  primary: "px-2 py-1 rounded text-white",
   link: ""
 };
 const activeClassesByButtonVariant: Record<ButtonVariant, string> = {
-  primary: "bg-pink-900 hover:bg-pink-700 text-white",
+  primary: "bg-pink-900 hover:bg-pink-700",
   link: "text-pink-900 hover:text-pink-700"
 };
 const disabledClassesByButtonVariant: Record<ButtonVariant, string> = {
-  primary: "bg-gray-500 text-white",
+  primary: "bg-gray-500",
   link: "text-gray-500"
 };
 </script>

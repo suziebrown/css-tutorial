@@ -2,23 +2,21 @@
 import { computed } from "vue";
 import LightbulbIcon from "@/icons/LightbulbIcon.vue";
 import TickIcon from "@/icons/TickIcon.vue";
-import CodeBlock from "@/components/CodeBlock.vue";
+import StylesCodeBlock from "@/components/StylesCodeBlock.vue";
 import ExpandableBlock from "@/components/ExpandableBlock.vue";
 
 type Props = {
-  solutionStyles: string;
+  solutionOldStyles: string | undefined;
+  solutionNewStyles: string;
 }
 const props = defineProps<Props>();
 
-const solutionCode = computed(() => `{
-  ${props.solutionStyles}
-}`
-);
+const styles = computed(() => props.solutionNewStyles + (props.solutionOldStyles ?? ''))
 </script>
 
 <template>
   <div class="mb-8">
-    <div :style="props.solutionStyles" />
+    <div :style="styles" />
   </div>
 
   <ExpandableBlock label-if-hidden="Show hint" label-if-shown="Hide hint">
@@ -35,9 +33,10 @@ const solutionCode = computed(() => `{
       <TickIcon />
     </template>
     <template #hiddenContent>
-      <CodeBlock>
-        {{ solutionCode }}
-      </CodeBlock>
+      <StylesCodeBlock>
+        <span class="text-gray-600">{{ props.solutionNewStyles }}</span>
+        <span v-if="props.solutionOldStyles" class="text-gray-400">{{ "\n  " + props.solutionOldStyles }}</span>
+      </StylesCodeBlock>
     </template>
   </ExpandableBlock>
 </template>

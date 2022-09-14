@@ -12,8 +12,9 @@ const lastQuestionNumber = computed(() => Math.max(...Object.keys(justADivSoluti
 const currentQuestionNumber = ref(1);
 
 // qq handle non-existent Record entry
-const currentQuestionSolution = computed(() => justADivSolutions[currentQuestionNumber.value]);
-const currentQuestionSolutionStyles = computed(() => stylesRecordToString(currentQuestionSolution.value.styles))
+const currentSolution = computed(() => justADivSolutions[currentQuestionNumber.value]);
+const currentSolutionOldStyles = computed(() => currentSolution.value.oldStyles ? stylesRecordToString(currentSolution.value.oldStyles) : null)
+const currentSolutionNewStyles = computed(() => stylesRecordToString(currentSolution.value.newStyles))
 
 const handleBack = () => currentQuestionNumber.value = currentQuestionNumber.value - 1;
 const handleNext = () => currentQuestionNumber.value = currentQuestionNumber.value + 1;
@@ -22,9 +23,9 @@ const handleNext = () => currentQuestionNumber.value = currentQuestionNumber.val
 <template>
   <SectionHeading title="Just a div" description="Style a single div to recreate the target content shown below." />
 
-  <QuestionContainer :solutionStyles="currentQuestionSolutionStyles">
+  <QuestionContainer :solution-old-styles="currentSolutionOldStyles" :solution-new-styles="currentSolutionNewStyles">
     <template #hint>
-      <div v-html="currentQuestionSolution.hint" />
+      <div v-html="currentSolution.hint" />
     </template>
   </QuestionContainer>
 
