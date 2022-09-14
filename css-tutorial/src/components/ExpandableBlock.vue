@@ -14,12 +14,9 @@ const toggleIsShown = () => isShown.value = !isShown.value;
 
 <template>
   <div class="flex flex-col w-full my-2">
-    <ButtonComponent @click="toggleIsShown">
+    <ButtonComponent :label="isShown ? props.labelIfShown : props.labelIfHidden" @click="toggleIsShown">
       <template #icon>
         <slot name="icon" />
-      </template>
-      <template #label>
-        {{ isShown ? props.labelIfShown : props.labelIfHidden }}
       </template>
     </ButtonComponent>
     <div v-if="isShown" class="border-2 rounded border-gray-200 py-1 px-2">
