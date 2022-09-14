@@ -1,30 +1,24 @@
 <script setup lang="ts">
-import { computed, ref } from "vue";
+import { computed } from "vue";
 import LightbulbIcon from "@/icons/LightbulbIcon.vue";
 import TickIcon from "@/icons/TickIcon.vue";
 import CodeBlock from "@/components/CodeBlock.vue";
 import ExpandableBlock from "@/components/ExpandableBlock.vue";
 
 type Props = {
-  targetStyle: string;
+  solutionStyles: string;
 }
 const props = defineProps<Props>();
 
-const displayTargetStyle = computed(() => `{
-  ${props.targetStyle}
+const solutionCode = computed(() => `{
+  ${props.solutionStyles}
 }`
 );
-
-const showHint = ref(false);
-const toggleHint = () => showHint.value = !showHint.value;
-
-const showSolution = ref(false);
-const toggleSolution = () => showSolution.value = !showSolution.value;
 </script>
 
 <template>
   <div class="mb-8">
-    <div :style="props.targetStyle" />
+    <div :style="props.solutionStyles" />
   </div>
 
   <ExpandableBlock label-if-hidden="Show hint" label-if-shown="Hide hint">
@@ -42,7 +36,7 @@ const toggleSolution = () => showSolution.value = !showSolution.value;
     </template>
     <template #hiddenContent>
       <CodeBlock>
-        {{ displayTargetStyle }}
+        {{ solutionCode }}
       </CodeBlock>
     </template>
   </ExpandableBlock>

@@ -10,7 +10,7 @@ const currentQuestionSolution = computed(() => justADivSolutions[currentQuestion
 
 <template>
   <SectionHeading title="Just a div" description="Style a single div to recreate the target content shown below." />
-  <QuestionContainer :targetStyle="currentQuestionSolution.solution">
+  <QuestionContainer :solutionStyles="currentQuestionSolution.styles">
     <template #hint>
       <div v-html="currentQuestionSolution.hint" />
     </template>
